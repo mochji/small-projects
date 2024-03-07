@@ -18,7 +18,7 @@ def loginShell():
             break
 
         time.sleep(3)
-        print("login failure")
+        print("login failure\n")
 
     subprocess.run(user["command"], cwd=user["home"])
 
