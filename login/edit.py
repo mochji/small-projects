@@ -210,6 +210,11 @@ def editShell():
         if (command == "q"):
             break
 
+        if (command == ""):
+            status = 0
+
+            continue
+
         status, userList = runCommand(command, userList)
 
         if status == 127:
