@@ -3,6 +3,7 @@ import platform
 PASSFILE      = "passfile"
 HOME_DIR      = ""
 DEFAULT_SHELL = ""
+DEFAULT_ROOT  = ""
 
 if platform.system() == "Windows":
     print("windows warning: this was built on linux, with windows support as an afterthought!")
@@ -11,6 +12,8 @@ if platform.system() == "Windows":
 
     HOME_DIR      = "C:\\Users\\"
     DEFAULT_SHELL = "C:\\Windows\\System32\\cmd.exe"
+    DEFAULT_ROOT  = "C:\\"
 else:
     HOME_DIR      = "/home/"
     DEFAULT_SHELL = "/bin/sh"
+    DEFAULT_ROOT  = "/"

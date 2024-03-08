@@ -1,3 +1,4 @@
+import os
 import time
 import subprocess
 
@@ -10,6 +11,8 @@ def loginShell():
     name     = None
     password = None
     user     = None
+    command  = None
+    home     = None
 
     while True:
         user = functions.login(userList)
@@ -20,6 +23,19 @@ def loginShell():
         time.sleep(3)
         print("login failure\n")
 
-    subprocess.run(user["command"], cwd=user["home"])
+    command = user["command"]
+    home    = user["home"]
+
+    if not os.path.exists(command):
+        print(f"{command}: no such file or directory")
+
+        command = settings.DEFAULT_SHELL
+
+    if not os.path.exists(home):
+        print(f"{home}: no such file or directory")
+
+        home = settings.DEFAULT_ROOT
+
+    subprocess.run(command, cwd=home)
 
 loginShell()
