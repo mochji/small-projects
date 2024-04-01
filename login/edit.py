@@ -196,30 +196,27 @@ def runCommand(command, userList):
 
     return 127, userList
 
-def editShell():
-    print("run `?' for a list of commands")
+print("run `?' for a list of commands")
 
-    command  = None
-    userList = functions.readPassfile(settings.PASSFILE)
-    status   = 0
+command  = None
+userList = functions.readPassfile(settings.PASSFILE)
+status   = 0
 
-    while True:
-        print(str(status) + " useredit> ", end="")
-        command = input()
+while True:
+    print(str(status) + " useredit> ", end="")
+    command = input()
 
-        if (command == "q"):
-            break
+    if (command == "q"):
+        break
 
-        if (command == ""):
-            status = 0
+    if (command == ""):
+        status = 0
 
-            continue
+        continue
 
-        status, userList = runCommand(command, userList)
+    status, userList = runCommand(command, userList)
 
-        if status == 127:
-            print(command + ": no such command")
+    if status == 127:
+        print(command + ": no such command")
 
-    functions.writePassfile(settings.PASSFILE, userList)
-
-editShell()
+functions.writePassfile(settings.PASSFILE, userList)

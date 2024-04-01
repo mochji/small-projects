@@ -5,37 +5,34 @@ import subprocess
 import settings
 import functions
 
-def loginShell():
-    userList = functions.readPassfile(settings.PASSFILE)
+userList = functions.readPassfile(settings.PASSFILE)
 
-    name     = None
-    password = None
-    user     = None
-    command  = None
-    home     = None
+name     = None
+password = None
+user     = None
+command  = None
+home     = None
 
-    while True:
-        user = functions.login(userList)
+while True:
+    user = functions.login(userList)
 
-        if user:
-            break
+    if user:
+        break
 
-        time.sleep(3)
-        print("login failure\n")
+    time.sleep(3)
+    print("login failure\n")
 
-    command = user["command"]
-    home    = user["home"]
+command = user["command"]
+home    = user["home"]
 
-    if not os.path.exists(command):
-        print(f"{command}: no such file or directory")
+if not os.path.exists(command):
+    print(f"{command}: no such file or directory")
 
-        command = settings.DEFAULT_SHELL
+    command = settings.DEFAULT_SHELL
 
-    if not os.path.exists(home):
-        print(f"{home}: no such file or directory")
+if not os.path.exists(home):
+    print(f"{home}: no such file or directory")
 
-        home = settings.DEFAULT_ROOT
+    home = settings.DEFAULT_ROOT
 
-    subprocess.run(command, cwd=home)
-
-loginShell()
+subprocess.run(command, cwd=home)
