@@ -100,10 +100,11 @@ end
 for a = 1, #arg do
 	if arg[a] == "--help" or arg[a] == "-h" then
 		io.write("this small lua program doesnt need a help menu but here\n")
-		io.write("file=FILE                       file to write to, set blank to not write to file\n")
-		io.write("csv=CSV               (boolean) set to \"true\" to write in the CSV format\n")
-		io.write("threads=THREADS       (integer) threads* to create, only the closest thread is written to file\n")
-		io.write("iterations=ITERATIONS (integer) iterations to run until stopping\n")
+		io.write("\tfile=FILE                       file to write to, set blank to not write to file\n")
+		io.write("\tcsv=CSV               (boolean) set to \"true\" to write in the CSV format\n")
+		io.write("\tthreads=THREADS       (integer) threads* to create, only the closest thread is written to file\n")
+		io.write("\titerations=ITERATIONS (integer) iterations to run until stopping\n")
+		io.write("\npublic domain")
 
 		os.exit(0)
 	end
