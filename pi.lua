@@ -1,7 +1,7 @@
 RATIO      = math.pi / 4
 FILE       = false
 CSV        = false
-THREADS    = 6 -- threads*
+THREADS    = 1 -- threads*
 ITERATIONS = 10000
 WINTERVAL  = 100
 VERBOSE    = false
