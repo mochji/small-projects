@@ -4,9 +4,13 @@ CSV        = false
 THREADS    = 6 -- threads*
 ITERATIONS = 10000
 WINTERVAL  = 100
+VERBOSE    = false
 
-local function clear()
-	io.write("\027[H\027[2J")
+local function print(format, ...)
+	if VERBOSE then
+		io.write(string.format(format, ...))
+		io.flush()
+	end
 end
 
 local function stepThread(list)
@@ -27,7 +31,7 @@ local function printThread(list)
 
 	local pi = inCircle * 4 / # list
 
-	io.write(string.format("%f (%d)", pi, #list))
+	print("%f (%d)", pi, #list)
 
 	return pi
 end
@@ -36,14 +40,14 @@ local function printThreads(threads)
 	local piList = {}
 
 	for a = 1, #threads do
-		io.write(string.format("%d: ", a))
+		print("%d: ", a)
 
 		piList[a] = printThread(threads[a])
 
-		io.write("   ")
+		print("    ")
 
 		if a % 3 == 0 or a == #threads then
-			io.write("\n")
+			print("\n")
 		end
 	end
 
@@ -55,9 +59,7 @@ local function printThreads(threads)
 		end
 	end
 
-	io.write(string.format("\n%d: %f (%f)\n", closestIndex, piList[closestIndex], math.abs(piList[closestIndex] - math.pi)))
-
-	io.flush()
+	print("\n%d: %f (%f)\n\n", closestIndex, piList[closestIndex], math.abs(piList[closestIndex] - math.pi))
 
 	return closestIndex, piList[closestIndex]
 end
@@ -102,6 +104,7 @@ for a = 1, #arg do
 	if arg[a] == "--help" or arg[a] == "-h" then
 		io.write("this small lua program doesnt need a help menu but here\n")
 		io.write("\t--help|-h                       display this menu\n")
+		io.write("\t--verbose|-v                    display verbose output\n")
 		io.write("\tfile=FILE                       file to write to, set blank to not write to file\n")
 		io.write("\tcsv=CSV               (boolean) set to \"true\" to write in the CSV format\n")
 		io.write("\tthreads=THREADS       (integer) threads* to create, only the closest thread is written to file\n")
@@ -110,6 +113,8 @@ for a = 1, #arg do
 		io.write("\npublic domain\n")
 
 		os.exit(0)
+	elseif arg[a] == "--verbose" or arg[a] == "-v" then
+		VERBOSE = true
 	end
 
 	local fileOption       = arg[a]:match("^file=(.+)$")
@@ -194,8 +199,6 @@ local closestIndex
 local closestPi
 
 for iteration = 1, ITERATIONS do
-	clear()
-
 	for a = 1, THREADS do
 		stepThread(threads[a])
 	end
