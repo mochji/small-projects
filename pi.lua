@@ -41,7 +41,7 @@ local function printThreads(threads)
 
 		io.write("   ")
 
-		if a % 3 == 0 then
+		if a % 3 == 0 or a == #threads then
 			io.write("\n")
 		end
 	end
@@ -100,6 +100,7 @@ end
 for a = 1, #arg do
 	if arg[a] == "--help" or arg[a] == "-h" then
 		io.write("this small lua program doesnt need a help menu but here\n")
+		io.write("\t--help|-h                       display this menu\n")
 		io.write("\tfile=FILE                       file to write to, set blank to not write to file\n")
 		io.write("\tcsv=CSV               (boolean) set to \"true\" to write in the CSV format\n")
 		io.write("\tthreads=THREADS       (integer) threads* to create, only the closest thread is written to file\n")
