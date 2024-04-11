@@ -3,6 +3,7 @@ FILE       = "pifile"
 CSV        = false
 THREADS    = 6 -- threads*
 ITERATIONS = 10000
+WINTERVAL  = 100
 
 local function clear()
 	io.write("\027[H\027[2J")
@@ -105,6 +106,7 @@ for a = 1, #arg do
 		io.write("\tcsv=CSV               (boolean) set to \"true\" to write in the CSV format\n")
 		io.write("\tthreads=THREADS       (integer) threads* to create, only the closest thread is written to file\n")
 		io.write("\titerations=ITERATIONS (integer) iterations to run until stopping\n")
+		io.write("\twinterval=WINTERVAL   (integer) write to the output file every WINTERVAL iterations\n")
 		io.write("\npublic domain\n")
 
 		os.exit(0)
@@ -114,6 +116,7 @@ for a = 1, #arg do
 	local csvOption        = arg[a]:match("^csv=(.+)$")
 	local threadsOption    = arg[a]:match("^threads=(.+)$")
 	local iterationsOption = arg[a]:match("^iterations=(.+)$")
+	local wintervalOption  = arg[a]:match("^winterval=(.+)$")
 
 	if fileOption then
 		FILE = fileOption
@@ -160,6 +163,24 @@ for a = 1, #arg do
 
 		ITERATIONS = iterationsOption
 	end
+
+	if wintervalOption then
+		wintervalOption = tonumber(wintervalOption)
+
+		if not wintervalOption then
+			io.write("winterval must be an integer\n")
+			io.flush()
+
+			os.exit(1)
+		elseif wintervalOption * 10 % 10 ~= 0 then
+			io.write("winterval must be an integer\n")
+			io.flush()
+
+			os.exit(1)
+		end
+
+		WINTERVAL = wintervalOption
+	end
 end
 
 local threads = {}
@@ -181,7 +202,7 @@ for iteration = 1, ITERATIONS do
 
 	closestIndex, closestPi = printThreads(threads)
 
-	if iteration % 100 == 0 then
+	if iteration % WINTERVAL == 0 then
 		writeIteration(piFile, iteration, closestPi, closestIndex)
 	end
 
