@@ -104,7 +104,7 @@ for a = 1, #arg do
 		io.write("\tcsv=CSV               (boolean) set to \"true\" to write in the CSV format\n")
 		io.write("\tthreads=THREADS       (integer) threads* to create, only the closest thread is written to file\n")
 		io.write("\titerations=ITERATIONS (integer) iterations to run until stopping\n")
-		io.write("\npublic domain")
+		io.write("\npublic domain\n")
 
 		os.exit(0)
 	end
