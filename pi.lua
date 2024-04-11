@@ -1,5 +1,5 @@
 RATIO      = math.pi / 4
-FILE       = "pifile"
+FILE       = false
 CSV        = false
 THREADS    = 6 -- threads*
 ITERATIONS = 10000
@@ -105,7 +105,7 @@ for a = 1, #arg do
 		io.write("this small lua program doesnt need a help menu but here\n")
 		io.write("\t--help|-h                       display this menu\n")
 		io.write("\t--verbose|-v                    display verbose output\n")
-		io.write("\tfile=FILE                       file to write to, set blank to not write to file\n")
+		io.write("\tfile=FILE                       file to write to, dont set to not write to file\n")
 		io.write("\tcsv=CSV               (boolean) set to \"true\" to write in the CSV format\n")
 		io.write("\tthreads=THREADS       (integer) threads* to create, only the closest thread is written to file\n")
 		io.write("\titerations=ITERATIONS (integer) iterations to run until stopping\n")
@@ -125,8 +125,6 @@ for a = 1, #arg do
 
 	if fileOption then
 		FILE = fileOption
-	elseif arg[a] == "file=" then
-		FILE = nil
 	end
 
 	if csvOption == "true" then
@@ -211,3 +209,5 @@ for iteration = 1, ITERATIONS do
 
 	iteration = iteration + 1
 end
+
+io.write(string.format("%f\n", closestPi))
