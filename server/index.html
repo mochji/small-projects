@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>server test :3</title>
+	</head>
+	<body>
+		<input id="terminalInput">
+		<div id="terminalOutput"></div>
+		<script>
+			function submitInput() {
+				fetch(window.location.href, {
+					method: "POST",
+					headers: {
+						"Content-Type": "text/plain"
+					},
+					body: terminalInput.value
+				})
+				.then(response => response.text())
+				.then(data => {
+					terminalOutput.innerText = data;
+				})
+				.catch(error => {
+					console.error("Oopsie Woopsie! Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at out headquarters are working VEWY HAWD to fix this!", error);
+				});
+
+				terminalInput.value = ""
+			}
+
+			document.addEventListener("DOMContentLoaded", () => {
+				terminalInput.addEventListener("keypress", function(event) {
+					if (event.key === "Enter") { submitInput(); }
+				});
+			});
+		</script>
+	</body>
+</html>
