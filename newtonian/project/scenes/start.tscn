@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://ig7qnjb6uq3r"]
+
+[ext_resource type="Script" path="res://scripts/start.gd" id="1_nyn7d"]
+
+[node name="Start" type="Node2D"]
+script = ExtResource("1_nyn7d")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 649.0
+offset_bottom = 451.0
+text = "this is a very bad, horribly optimized test
+this took like 5 hours and i'm probably not gonna work on it anymore
+
+keybinds:
+1: spawn new object
+2: toggle current object anchor status
+3: toggle current object active status
+z: destroy current object
+c: toggle debug info
+q: select previous object
+e: select next object
+r: add a satellite to the current object
+wasd: move the current object
+
+press space to start
+have fun! :3"
