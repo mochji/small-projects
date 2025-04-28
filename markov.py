@@ -34,14 +34,14 @@ def train(weights, data):
 
 def choose(weights, r):
     choice = 0
+    floor  = 0
 
     for weight in weights:
-        r -= weight
-
-        if r <= 0:
+        if r >= floor and r < floor + weight:
             return choice
 
         choice += 1
+        floor  += weight
 
     return choice
 
